@@ -39,24 +39,28 @@ class NumberValue {
 public class area {
   public static void main(String[] args) {
       Scanner scan=new Scanner(System.in);
-      System.out.print("1 for tri \n 2 for rec \3 for circle");
+      System.out.print("1 for tri \n 2 for rec \n  for circle\n");
       int select=scan.nextInt();
       
       switch (select) {
           case 1:
+              System.out.print("Please input the length and height\n");
               int length=scan.nextInt();
               int height=scan.nextInt();
                NumberValue tri = new NumberValue(length,height,"tri");
                tri.display();
               break;
                case 2:
-                   int length=scan.nextInt();
-              int height=scan.nextInt();
-                NumberValue rec = new NumberValue("rec",20,10);
+                   System.out.print("Please input the length and height\n");
+                   int lengths=scan.nextInt();
+              int heights=scan.nextInt();
+                NumberValue rec = new NumberValue("rec",heights,lengths);
                rec.display();
               break;
                 case 3:
-                NumberValue circle = new NumberValue("circle",10);
+                    System.out.print("Please input circle area\n");
+                    int circles=scan.nextInt();
+                NumberValue circle = new NumberValue("circle",circles);
                circle.display();
               break;
           default:

@@ -56,16 +56,13 @@ public class file {
             Scanner sc = new Scanner(files);
             while (sc.hasNext()) {
                 System.out.print("\n" + sc.nextLine());
-
             }
             sc.close();
         } catch (FileNotFoundException e) {
             System.out.print(e);
         }
 
-
-
-        //file deletion
+        //file deletion 
         try {
             //always take files in directory
             File drs = new File("D:/Java/Lab Report3/student");

@@ -1,6 +1,7 @@
-package String;
+
 
 import java.util.Scanner;
+
 
 class Student{
     String name;
@@ -63,7 +64,7 @@ public class GpaCalculatorWithConstructor {
         double marks2=scan.nextDouble();
 
         
-        Student student=new Student(name,id,marks1,marks2);
-        student.display();
+        Student student1=new Student(name,id,marks1,marks2);
+        student1.display();
     }
 }

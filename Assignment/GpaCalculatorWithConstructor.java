@@ -17,7 +17,6 @@ class Student{
     }
     void member(){
         gpa=(marks1+marks2)/2;
-        System.out.print(gpa);
         if(marks1 >33 && marks2 >33){
             if(gpa>=90){
                 System.out.println("A+");
@@ -63,8 +62,6 @@ public class GpaCalculatorWithConstructor {
         System.out.println("Enter the marks2 value of student:");
         double marks2=scan.nextDouble();
         scan.close();
-
-        
         Student student1=new Student(name,id,marks1,marks2);
         student1.display();
     }

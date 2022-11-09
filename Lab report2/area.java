@@ -66,7 +66,6 @@ public class area {
                     throw new AssertionError();
             }
         } catch (AssertionError e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

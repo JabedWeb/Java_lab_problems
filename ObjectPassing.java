@@ -1,7 +1,5 @@
 
 
-// Class
-// Helper class
 class ObjectPassDemo {
 	int a, b;
 
@@ -31,10 +29,6 @@ public class ObjectPassing {
 		ObjectPassDemo ob2 = new ObjectPassDemo(100, 22);
 		ObjectPassDemo ob3 = new ObjectPassDemo(-1, -1);
 
-		// Checking whether object are equal as custom
-		// values
-		// above passed and printing corresponding boolean
-		// value
 		System.out.println("ob1 == ob2: "
 						+ ob1.equalTo(ob2));
 		System.out.println("ob1 == ob3: "

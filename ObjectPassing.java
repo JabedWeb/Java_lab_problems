@@ -10,6 +10,10 @@ class ObjectPassDemo {
 		b = j;
 	}
 
+	ObjectPassDemo(int i ){
+		a=i;
+	}
+
 	// Method
 	boolean equalTo(ObjectPassDemo obj4 ){
         if (obj4.a == a && obj4.b == b)
@@ -17,7 +21,16 @@ class ObjectPassDemo {
         else
             return false;
     }
+	boolean equal(ObjectPassDemo obj7){
+		if(obj7.a==a){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 }
+
 
 // Main class
 public class ObjectPassing {
@@ -28,6 +41,14 @@ public class ObjectPassing {
 		ObjectPassDemo ob1 = new ObjectPassDemo(100, 22);
 		ObjectPassDemo ob2 = new ObjectPassDemo(100, 22);
 		ObjectPassDemo ob3 = new ObjectPassDemo(-1, -1);
+
+		ObjectPassDemo obj5=new ObjectPassDemo(50);
+		ObjectPassDemo obj6=new ObjectPassDemo(50);
+
+		System.out.print(obj5.equal(obj6));
+
+
+
 
 		System.out.println("ob1 == ob2: "
 						+ ob1.equalTo(ob2));

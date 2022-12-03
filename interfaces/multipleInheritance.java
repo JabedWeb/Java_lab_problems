@@ -1,12 +1,12 @@
 package interfaces;
 
 
-abstract class D {
-    D(){
-        System.out.println("D");
-    }
-    abstract void f();
-}
+// abstract class D {
+//     D(){
+//         System.out.println("D");
+//     }
+//     abstract void f();
+// }
 interface A{
    void methodA();
 
@@ -27,22 +27,13 @@ class c implements A, B {
         System.out.println("Method B");
     }
 }
-
-
-class c extends D {
-    // final int a=10;
-   public void f(){
-        System.out.println("f");
-    }
-}
-
 public class multipleInheritance {
 
     public static void main(String[] args) {
 
         c obj=new c();
         obj.methodA();
-        obj.f();
+        // obj.f();
         
     }
     

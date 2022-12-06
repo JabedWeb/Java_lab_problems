@@ -1,13 +1,12 @@
 package interfaces;
 
-
 interface A{
-   void methodA();
+  protected void methodA();
 }
 
 interface B {
-    void methodB();
-    int data=10;
+   private void methodB();
+   public void methodD();
 }
 
 class c implements A, B {
@@ -18,15 +17,20 @@ class c implements A, B {
     public void methodB() {
         System.out.println("Method B");
     }
+    public void methodD() {
+        System.out.println("Method D");
+    }
 }
-public class multipleInheritance {
+public class access {
 
     public static void main(String[] args) {
 
         c obj=new c();
         obj.methodA();
         obj.methodB();
+        // obj.f();
         
     }
     
 }
+

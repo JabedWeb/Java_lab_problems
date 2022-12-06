@@ -1,0 +1,213 @@
+.image-height .e-gallery-image.elementor-gallery-item__image.e-gallery-image-loaded {
+    height: 463px !important;
+    border-radius: 0px 7px 7px 0px;
+}
+
+.gallery_css .e-gallery-item.elementor-gallery-item.elementor-animated-content .e-gallery-image.elementor-gallery-item__image.e-gallery-image-loaded {
+    height: 224px !important;
+}
+
+.elementor-slideshow__title {
+    display: none !important;
+}
+
+.accordian .elementor-accordion-item {
+    border-bottom: 1px solid #f3f3f3 !IMPORTANT;
+}
+
+.heading-css h2 a {
+    text-decoration: none !important;
+}
+
+#progressbar span.elementor-progress-percentage {
+    position: absolute !important;
+    right: 0 !important;
+    top: -18px !important;
+}
+
+select#form-field-field_dcbc1e2 {
+    font-size: 16px;
+    line-height: 39px;
+    color: #f5f5f59e;
+}
+
+/* omgaving gallery */
+.omgeving-gallery .e-gallery-image.elementor-gallery-item__image.e-gallery-image-loaded {
+    height: 310px !important;
+}
+
+/* activation image */
+.activation-css .e-gallery-image.elementor-gallery-item__image.e-gallery-image-loaded {
+    height: 500px;
+}
+
+.activation-bottom-css .e-gallery-image.elementor-gallery-item__image.e-gallery-image-loaded {
+    height: 350px;
+}
+
+/* input.elementor-field.elementor-size-sm.elementor-field-textual.elementor-date-field.flatpickr-input.flatpickr-mobile {
+    padding-left: 32px !important;
+} */
+
+@media only screen and (min-width: 450px) {
+
+    /* 
+reservation form */
+    /*placeholder spacing*/
+    form.elementor-form .elementor-field-group-email input,
+    .elementor-field-group-name input,
+    .elementor-field-type-date input,
+    .elementor-field-type-tel input,
+    .elementor-field-type-textarea textarea {
+        padding-left: 50px;
+    }
+
+    /* *Icon size & position settings*/
+    */ form.elementor-form .elementor-field-group-email::before,
+    .elementor-field-group-name::before,
+    .elementor-field-type-tel::before,
+    .elementor-field-type-date::before,
+    .elementor-field-type-textarea::before {
+        position: absolute;
+        left: 16px;
+        top: 13% !important;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "";
+        color: #76ae1d;
+        z-index: 999;
+        font-size: 17px;
+    }
+
+    /*Name field*/
+    .elementor-field-group-name::before {
+        content: "\f007";
+        position: absolute;
+        left: 16px;
+        top: 13% !important;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #76ae1d;
+        z-index: 999;
+        font-size: 17px;
+    }
+
+    /*Email field*/
+    .elementor-field-group-email::before {
+        content: "\f0e0";
+            position: absolute;
+        left: 16px;
+        top: 13% !important;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #76ae1d;
+        z-index: 999;
+        font-size: 17px;
+    }
+
+
+
+    /*Phone field*/
+    .elementor-field-type-tel::before {
+        content: "\f095";
+        position: absolute;
+        left: 16px;
+        top: 13% !important;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #76ae1d;
+        z-index: 999;
+        font-size: 17px;
+    }
+
+    .elementor-field-type-date::before {
+        content: "\f784";
+        position: absolute;
+        left: 16px;
+        top: 13% !important;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #76ae1d;
+        z-index: 999;
+        font-size: 17px;
+    }
+
+    /* calender */
+
+    .wpsbc-calendars {
+        text-align: center !important;
+        display: flex;
+        justify-content: center !important;
+    }
+
+
+}
+@media only screen and (max-width: 450px) {
+
+    .elementor-field-type-date input {
+        height: 40px !important;
+    }
+
+    input[type="date"]:before {
+        color: rgba(53, 53, 53, 0.9);
+        content: attr(placeholder);
+    }
+
+    input[type="date"].full:before {
+        color: rgba(53, 53, 53, 0.9);
+        content: "" !important;
+    }
+
+    input[type="time"]:before {
+        color: rgba(53, 53, 53, 0.9);
+        content: attr(placeholder);
+    }
+
+    input[type="time"].full:before {
+        color: rgba(53, 53, 53, 0.9);
+        content: "" !important;
+    }
+}
+
+
+.home-form-css input#form-field-name {
+    padding: 0 !important;
+}
+
+.home-form-css input#form-field-name {
+    padding: 0 !important;
+}
+
+.home-form-css input#form-field-field_bec25a2 {
+    padding: 0 !important;
+}
+
+.elementor-702 .elementor-element.elementor-element-f2a3785 .elementor-field-group:not(.elementor-field-type-upload) .elementor-field:not(.elementor-select-wrapper) {
+    background-color: #ffffff;
+    border-color: #F1F1F1;
+    border-radius: 40px 40px 40px 40px;
+    padding: 19px 0px;
+}
+
+
+Can you call a constructor of a class inside another constructor?
+
+
+Yes, we can call a constructor of a class inside another constructor. This is also called as constructor chaining. Constructor chaining can be done in 2 ways-
+
+Within the same class: For constructors in the same class, the this() keyword can be used.
+From the base class: The super() keyword is used to call the constructor from the base class.
+The constructor chaining follows the process of inheritance. The constructor of the sub class first calls the constructor of the super class. Due to this, the creation of sub class’s object starts with the initialization of the data members of the super class. The constructor chaining works similarly with any number of classes. Every constructor keeps calling the chain till the top of the chain.
+
+
+
+
+Do final, finally keywords have the same function?
+
+No, final, finally and finalize keywords have different functionalities.
+
+Final is used to restrict classes, variables, or methods, the final keyword.
+
+Finally is used to execute the code written inside the block without handling any exceptions.
+
+Finalize is used to call the function of the implementation of cleaning the garbage collection of an object

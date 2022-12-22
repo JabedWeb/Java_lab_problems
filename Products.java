@@ -31,10 +31,10 @@ p1.isAvailable();
         Product p2 = new Product("Rayhan","2080", 7,true);
 
         if(p2.check==true){
-            System.out.println("Yes Product ase");
+            System.out.println("Yes Product is avaiable");
         }
         else {
-            System.out.println("Nai");
+            System.out.println("not available");
         }
 
 

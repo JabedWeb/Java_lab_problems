@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<style>
+
+    #time {
+        font-size: 18px;
+       text-align: center;
+
+       background-color: #f5f5f5;
+       padding: 10px;
+    }
+    .offer-counter{
+        color: red;
+        font-weight: 600;
+    }
+</style>
+<body>
+    
+
+
+
+
+        <p id="time"></p>
+
+
+
+
+    <script>    
+
+      setInterval(() => {
+              
+            
+            let current_hurs = new Date().getHours();
+            let current_min = new Date().getMinutes();
+            let current_sec = new Date().getSeconds()
+            let initial_hurs = (14-1);
+            let initial_min = 60
+            let initial_sec = 60
+            let dif_hurs = initial_hurs - current_hurs;
+            let dif_min = initial_min - current_min
+            let dif_sec = initial_sec - current_sec
+
+            if (dif_hurs > 0) {
+               
+                document.getElementById('time'). innerHTML =  `LAST CHANCE UK STANDARD DEL + EXTRA 10% OFF ORDERS £150+ WITH CODE XMS10. ENDS IN: <span class="offer-counter">${dif_hurs + ":"  + dif_min + ":"  + dif_sec}</span>`
+                
+            }else{
+                dif_hurs =(24- current_hurs)+initial_hurs;
+                document.getElementById('time').innerHTML=`LAST CHANCE UK STANDARD DEL + EXTRA 10% OFF ORDERS £150+ WITH CODE XMS10. ENDS IN: <span class="offer-counter">${dif_hurs + ":"  + dif_min + ":"  + dif_sec}</span>`
+                
+            }
+            
+      }, 1000);
+    </script>
+</body>
+</html>

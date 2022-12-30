@@ -387,3 +387,5 @@ public class Front extends javax.swing.JFrame {
 {
     
 }
+
+

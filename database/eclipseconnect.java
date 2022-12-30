@@ -48,9 +48,8 @@ public class eclipseconnect extends JFrame {
 	public void connect() {
 		
 	       try {
-	           System.out.println("Connected Database2");
+	          
 	           Class.forName("com.mysql.cj.jdbc.Driver"); 
-	             System.out.println("Connected Database3");
 	           con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop", "root", "");    
 
 	       } catch (ClassNotFoundException | SQLException ex) {

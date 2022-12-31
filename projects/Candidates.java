@@ -270,6 +270,29 @@ public class Candidates {
 		frame.getContentPane().add(button_1);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+
+			       try {
+			   
+			           insert = con1.prepareStatement("delete from candidatetbl where Cld = ?");
+			     
+			           insert.setInt(1, Key);
+			            System.out.println("Connected Database6");
+			           insert.executeUpdate();
+//			           JOptionPane.showMessageDialog(null, "Record deleted");
+			           table_load();
+			           Cname.setText("");
+			           Cname.requestFocus();
+			           table_load();
+			   
+			       } catch ( SQLException ex) {
+			           ex.printStackTrace();
+			       }
+			}
+		});
 		btnDelete.setForeground(new Color(255, 255, 255));
 		btnDelete.setFont(new Font("Dialog", Font.BOLD, 20));
 		btnDelete.setBackground(Color.RED);

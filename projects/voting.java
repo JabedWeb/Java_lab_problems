@@ -2,11 +2,18 @@ package framejava;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import net.proteanit.sql.DbUtils;
 
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -17,12 +24,17 @@ import java.awt.Button;
 import java.awt.Color;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Voting {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField Cname;
+	private JTextField StudentId;
+	private JTable table;
+	private int Key=-1;
+	private JLabel vote;
 
 	/**
 	 * Launch the application.
@@ -45,7 +57,45 @@ public class Voting {
 	 */
 	public Voting() {
 		initialize();
+		connect();
+		table_load();
+		vote.setVisible(false);
+		
 	}
+	
+	   Connection con1;
+	   PreparedStatement insert;
+	   ResultSet rs;
+	public void connect() {
+		
+	       try {
+	           System.out.println("Connected Database2");
+	           Class.forName("com.mysql.cj.jdbc.Driver"); 
+	             System.out.println("Connected Database3");
+	           con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/electiondb", "root", "");    
+
+	       } catch (ClassNotFoundException | SQLException ex) {
+	    	   ex.printStackTrace();
+	       }
+		
+	}
+
+	
+	  public void table_load()
+	    {
+	    	try 
+	    	{
+		    insert = con1.prepareStatement("select * from candidatetbl");
+		    rs = insert.executeQuery();
+		    table.setModel(DbUtils.resultSetToTableModel(rs));
+		    
+		   
+		} 
+	    	catch (SQLException e) 
+	    	 {
+	    		e.printStackTrace();
+		  } 
+	    }
 
 	/**
 	 * Initialize the contents of the frame.
@@ -82,25 +132,19 @@ public class Voting {
 		lblManageCandidates_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		frame.getContentPane().add(lblManageCandidates_1);
 		
-		JScrollPane scrollPane1 = new JScrollPane();
-		scrollPane1.setBounds(44, 373, 1138, 274);
-		frame.getContentPane().add(scrollPane1);
-		
-		JTable table = new JTable();
-		scrollPane1.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column"
-			}
-		));
-		
 		JButton btnVote = new JButton("Vote");
+		btnVote.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(Cname.getText().isEmpty()) {
+					vote.setVisible(false);
+				}
+				else {
+					vote.setVisible(true);
+				}
+				
+			}
+		});
 		btnVote.setForeground(new Color(255, 255, 255));
 		btnVote.setFont(new Font("Dialog", Font.BOLD, 20));
 		btnVote.setBackground(new Color(0, 128, 0));
@@ -109,13 +153,14 @@ public class Voting {
 		
 		JLabel lblName_1_1 = new JLabel("Candidate List");
 		lblName_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblName_1_1.setBounds(489, 321, 190, 27);
+		lblName_1_1.setBounds(990, 312, 190, 27);
 		frame.getContentPane().add(lblName_1_1);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(398, 196, 196, 38);
-		frame.getContentPane().add(textField);
+		Cname = new JTextField();
+		Cname.setEditable(false);
+		Cname.setColumns(10);
+		Cname.setBounds(398, 196, 196, 38);
+		frame.getContentPane().add(Cname);
 		
 		JLabel lblName = new JLabel("Name");
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -127,9 +172,34 @@ public class Voting {
 		lblStudentId.setBounds(628, 135, 126, 27);
 		frame.getContentPane().add(lblStudentId);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(604, 196, 204, 38);
-		frame.getContentPane().add(textField_1);
+		StudentId = new JTextField();
+		StudentId.setEditable(false);
+		StudentId.setColumns(10);
+		StudentId.setBounds(604, 196, 204, 38);
+		frame.getContentPane().add(StudentId);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DefaultTableModel model= (DefaultTableModel) table.getModel();
+				int MyIndex =table.getSelectedRow();
+				Key=Integer.valueOf(model.getValueAt(MyIndex, 0).toString());
+				Cname.setText(model.getValueAt(MyIndex, 1).toString());
+				StudentId.setText(model.getValueAt(MyIndex, 2).toString());
+			}
+		});
+		scrollPane.setBounds(58, 343, 1138, 320);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+	    vote = new JLabel("Vote Counted !!");
+		vote.setForeground(new Color(0, 128, 0));
+		vote.setHorizontalAlignment(SwingConstants.LEFT);
+		vote.setFont(new Font("Tahoma", Font.BOLD, 20));
+		vote.setBounds(542, 312, 190, 27);
+		frame.getContentPane().add(vote);
 	}
 }

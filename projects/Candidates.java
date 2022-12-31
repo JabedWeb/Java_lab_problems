@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.*;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import com.mysql.cj.xdevapi.Statement;
 
@@ -35,6 +36,7 @@ public class Candidates {
 	  private JTextField Cname;
 	private JTextField StudentId;
 	private JComboBox ElectionName ;
+	private int Key=-1;
 
 
 	/**
@@ -112,7 +114,7 @@ public class Candidates {
 	                insert2 = con1.prepareStatement("select * from electiontbl");
 	               rs2 = insert2.executeQuery();
 	                while (rs2.next()) {
-	                	String ElectId = rs2.getString("EId");
+	                	String ElectId = rs2.getString("Ename");
 	                	
 	                	ElectionName.addItem(ElectId);
 	                }
@@ -208,7 +210,7 @@ public class Candidates {
 				           insert.setString(3,ElectionName.getSelectedItem().toString());
 				            System.out.println("Connected Database6");
 				           insert.executeUpdate();
-				           JOptionPane.showMessageDialog(null, "Record Saved");
+				        //   JOptionPane.showMessageDialog(null, "Record Saved");
 				           table_load();
 				           Cname.setText("");
 				           StudentId.setText("");
@@ -231,6 +233,36 @@ public class Candidates {
 		frame.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("Edit");
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+
+			       try {
+			   
+			           insert = con1.prepareStatement("update candidatetbl set CName=? , StudentId=?, ElectionName =? where Cld =?");
+			           
+			            System.out.println("Connected Database5");
+			            insert.setString(1,Cname.getText());
+				           insert.setString(2, StudentId.getText());
+				           insert.setString(3,ElectionName.getSelectedItem().toString());
+			           insert.setInt(4, Key);
+			            System.out.println("Connected Database6");
+			           insert.executeUpdate();
+//			           JOptionPane.showMessageDialog(null, "Record updated");
+			           table_load();
+			           Cname.setText("");
+			           StudentId.setText("");
+			           Cname.requestFocus();
+			            
+			       } catch ( SQLException ex) {
+			           ex.printStackTrace();
+			       }
+				
+				
+			}
+		});
 		button_1.setForeground(new Color(255, 255, 255));
 		button_1.setFont(new Font("Dialog", Font.BOLD, 20));
 		button_1.setBackground(new Color(255, 0, 128));
@@ -254,6 +286,19 @@ public class Candidates {
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				DefaultTableModel model= (DefaultTableModel) table.getModel();
+				int MyIndex =table.getSelectedRow();
+				Key=Integer.valueOf(model.getValueAt(MyIndex, 0).toString());
+				Cname.setText(model.getValueAt(MyIndex, 1).toString());
+				StudentId.setText(model.getValueAt(MyIndex, 2).toString());
+				ElectionName.setSelectedItem(model.getValueAt(MyIndex, 3).toString());
+				
+			}
+		});
 		scrollPane.setViewportView(table);
 
 	}

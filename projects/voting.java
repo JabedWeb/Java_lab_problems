@@ -34,6 +34,7 @@ public class Voting {
 	private JTextField StudentId;
 	private JTable table;
 	private int Key=-1;
+	private int Electid;
 	private JLabel vote;
 
 	/**
@@ -72,7 +73,7 @@ public class Voting {
 	           System.out.println("Connected Database2");
 	           Class.forName("com.mysql.cj.jdbc.Driver"); 
 	             System.out.println("Connected Database3");
-	           con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/electiondb", "root", "");    
+	            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/electiondb", "root", "");    
 
 	       } catch (ClassNotFoundException | SQLException ex) {
 	    	   ex.printStackTrace();
@@ -141,6 +142,33 @@ public class Voting {
 				}
 				else {
 					vote.setVisible(true);
+				}
+				
+				
+				 
+				try {
+
+					insert = con1.prepareStatement("insert into voterstbl (VoterId,ElectionId,CandidateId ) values(?,?,?)");
+					System.out.println("Connected Database5");
+					insert.setInt(1, Electid);
+					insert.setInt(2, Electid);
+					insert.setInt(3, Key);
+					
+					insert.executeUpdate();
+					System.out.println("Connected Database6");
+					
+					System.out.println("Connected Database7");
+					table_load();
+//					System.out.println("Connected Database8");
+//					ElectionNameTb.setText("");
+//					System.out.println("Connected Database9");
+//					ElectionNameTb.requestFocus();
+
+				}
+				catch (SQLException ex) {
+					
+					ex.printStackTrace();
+					
 				}
 				
 			}

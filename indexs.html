@@ -130,6 +130,7 @@
             price = (price + 0.05).toFixed(2);
             if(price > 0.25){
                 price = 0.25;
+                alert('You can not buy more than 5 NFTs');
             }
             //total_amount dollar price
             document.getElementById('total_amount').innerHTML ='$'+price;
@@ -138,6 +139,7 @@
             document.getElementById('price').innerHTML = price;
             total_amount=price;
             document.getElementById('total_amount_eth').innerHTML = price;
+
         });
 
         //price decrease

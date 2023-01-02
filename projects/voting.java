@@ -36,6 +36,9 @@ public class Voting {
 	private int Key=-1;
 	private int Electid;
 	private JLabel vote;
+	private JButton btnVote;
+	static int voitingId;
+	static int Vnumber;
 
 	/**
 	 * Launch the application.
@@ -60,9 +63,16 @@ public class Voting {
 		initialize();
 		connect();
 		table_load();
-		vote.setVisible(false);
-		
+		vote.setVisible(false);	
 	}
+	
+	//voting
+	
+	public Voting (int Voterid) {
+		voitingId=Voterid;
+	}
+	
+	
 	
 	   Connection con1;
 	   PreparedStatement insert;
@@ -70,14 +80,41 @@ public class Voting {
 	public void connect() {
 		
 	       try {
-	           System.out.println("Connected Database2");
+	           System.out.println("Connected Database4");
 	           Class.forName("com.mysql.cj.jdbc.Driver"); 
-	             System.out.println("Connected Database3");
+	             System.out.println("Connected Database5");
 	            con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/electiondb", "root", "");    
 
 	       } catch (ClassNotFoundException | SQLException ex) {
 	    	   ex.printStackTrace();
 	       }
+		
+	}
+	
+	 PreparedStatement insert3;
+	public void VCheck() {
+		
+	   	try 
+    	{
+	   		System.out.println("ok1");
+	   		System.out.println("voteingid "+ voitingId + "ElectionName " + Electid);
+	    insert3 = con1.prepareStatement("select Count(*) from voterstbl where VoterId="+voitingId+" and ElectionId ="+ Electid+"");
+	    ResultSet  rs3 = insert3.executeQuery();
+	    
+
+	     if(rs3.next()==true)
+         {
+	    	 Vnumber=rs3.getInt(1); 
+         }
+	     else {
+	    	 System.out.print("Not working");
+	     }
+	} 
+    	catch (SQLException e) 
+    	 {
+    		e.printStackTrace();
+    		System.out.print("Not working");
+	  } 
 		
 	}
 
@@ -101,7 +138,7 @@ public class Voting {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\Project\\images.png"));
 		frame.setAlwaysOnTop(true);
@@ -119,7 +156,7 @@ public class Voting {
 		frame.getContentPane().add(button_3_1);
 		
 		JLabel lblYourCandidate = new JLabel("Your Candidate");
-		lblYourCandidate.setBounds(146, 197, 190, 27);
+		lblYourCandidate.setBounds(174, 173, 190, 27);
 		lblYourCandidate.setFont(new Font("Tahoma", Font.BOLD, 20));
 		frame.getContentPane().add(lblYourCandidate);
 		
@@ -133,61 +170,68 @@ public class Voting {
 		lblManageCandidates_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		frame.getContentPane().add(lblManageCandidates_1);
 		
-		JButton btnVote = new JButton("Vote");
+		btnVote = new JButton("Vote");
 		btnVote.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				VCheck();
+				
+				System.out.println(Vnumber);
+				
 				if(Cname.getText().isEmpty()) {
 					vote.setVisible(false);
 				}
+				else if (Vnumber>0) {
+					
+					System.out.println("You can not vote Twice");
+				}
 				else {
 					vote.setVisible(true);
-				}
-				
-				
-				 
-				try {
+					try {
 
-					insert = con1.prepareStatement("insert into voterstbl (VoterId,ElectionId,CandidateId ) values(?,?,?)");
-					System.out.println("Connected Database5");
-					insert.setInt(1, Electid);
-					insert.setInt(2, Electid);
-					insert.setInt(3, Key);
-					
-					insert.executeUpdate();
-					System.out.println("Connected Database6");
-					
-					System.out.println("Connected Database7");
-					table_load();
-//					System.out.println("Connected Database8");
-//					ElectionNameTb.setText("");
-//					System.out.println("Connected Database9");
-//					ElectionNameTb.requestFocus();
+						insert = con1.prepareStatement("insert into voterstbl (VoterId,ElectionId,CandidateId ) values(?,?,?)");
+						System.out.println("Connected Database5");
+						
+						System.out.println(voitingId);
+						
+						insert.setInt(1, voitingId);
+						insert.setInt(2, Electid);
+						insert.setInt(3, Key);
+						
+						insert.executeUpdate();
+						System.out.println("Connected Database6");
+						
+						System.out.println("Connected Database7");
+						table_load();
+						btnVote.setVisible(false);
 
+					}
+					catch (SQLException ex) {
+						
+						ex.printStackTrace();
+						
+					}
 				}
-				catch (SQLException ex) {
-					
-					ex.printStackTrace();
-					
-				}
+				//
+				
 				
 			}
 		});
 		btnVote.setForeground(new Color(255, 255, 255));
 		btnVote.setFont(new Font("Dialog", Font.BOLD, 20));
 		btnVote.setBackground(new Color(0, 128, 0));
-		btnVote.setBounds(558, 244, 105, 46);
+		btnVote.setBounds(556, 220, 105, 46);
 		frame.getContentPane().add(btnVote);
 		
 		JLabel lblName_1_1 = new JLabel("Candidate List");
 		lblName_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblName_1_1.setBounds(990, 312, 190, 27);
+		lblName_1_1.setBounds(1006, 276, 190, 27);
 		frame.getContentPane().add(lblName_1_1);
 		
 		Cname = new JTextField();
 		Cname.setEditable(false);
 		Cname.setColumns(10);
-		Cname.setBounds(398, 196, 196, 38);
+		Cname.setBounds(395, 172, 196, 38);
 		frame.getContentPane().add(Cname);
 		
 		JLabel lblName = new JLabel("Name");
@@ -203,7 +247,7 @@ public class Voting {
 		StudentId = new JTextField();
 		StudentId.setEditable(false);
 		StudentId.setColumns(10);
-		StudentId.setBounds(604, 196, 204, 38);
+		StudentId.setBounds(601, 172, 204, 38);
 		frame.getContentPane().add(StudentId);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -215,9 +259,10 @@ public class Voting {
 				Key=Integer.valueOf(model.getValueAt(MyIndex, 0).toString());
 				Cname.setText(model.getValueAt(MyIndex, 1).toString());
 				StudentId.setText(model.getValueAt(MyIndex, 2).toString());
+				Electid =Integer.valueOf(model.getValueAt(MyIndex, 3).toString());
 			}
 		});
-		scrollPane.setBounds(58, 343, 1138, 320);
+		scrollPane.setBounds(58, 313, 1123, 286);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -227,7 +272,27 @@ public class Voting {
 		vote.setForeground(new Color(0, 128, 0));
 		vote.setHorizontalAlignment(SwingConstants.LEFT);
 		vote.setFont(new Font("Tahoma", Font.BOLD, 20));
-		vote.setBounds(542, 312, 190, 27);
+		vote.setBounds(534, 276, 190, 27);
 		frame.getContentPane().add(vote);
+		
+		JButton button_3_1_1 = new JButton("Back");
+		button_3_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new login().setVisible(true);
+				frame.dispose();
+			}
+		});
+		button_3_1_1.setForeground(Color.BLACK);
+		button_3_1_1.setFont(new Font("Dialog", Font.BOLD, 20));
+		button_3_1_1.setBackground(Color.LIGHT_GRAY);
+		button_3_1_1.setBounds(1057, 617, 105, 46);
+		frame.getContentPane().add(button_3_1_1);
+	}
+
+	public void setVisible(boolean b) {
+		Voting window = new Voting();
+		window.frame.setVisible(true);
+		
 	}
 }

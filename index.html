@@ -59,6 +59,67 @@
             }
             
       }, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        //price increas
+
+        document.getElementById('increase').addEventListener('click', function () {
+            var price = document.getElementById('price').innerHTML;
+             var total_amount= document.getElementById('total_amount').innerHTML;
+             total_amount = total_amount.replace('$', ''); 
+            price = price.replace('ETH', '');
+            price = parseFloat(price);
+            price = (price + 0.05).toFixed(2);
+            if(price > 0.25){
+                price = 0.25;
+            }
+            total_amount = price;
+            document.getElementById('total_amount').innerHTML ='$'+total_amount;
+            price = price + ' ETH';
+            document.getElementById('price').innerHTML = price;
+            total_amount=price;
+            document.getElementById('total_amount_eth').innerHTML = price;
+        });
+
+        //price decrease
+        document.getElementById('decrease').addEventListener('click', function () {
+            var price = document.getElementById('price').innerHTML;
+            price = price.replace('ETH', '');
+            price = parseFloat(price);
+            price = (price - 0.05).toFixed(2);
+            if(price < 0.0){
+                price = 0.00;
+            }
+            document.getElementById('total_amount_eth').innerHTML = price;
+            price = price + ' ETH';
+            document.getElementById('price').innerHTML = price;
+            document.getElementById('total_amount_eth').innerHTML = price;
+
+        });
+  
+
+
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

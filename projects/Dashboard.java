@@ -85,7 +85,7 @@ public class Dashboard {
 			e.printStackTrace();
 		}
 	}
-	
+	int Winnerid;
 	public void GetWinner() {
 		
 	   	try 
@@ -97,7 +97,8 @@ public class Dashboard {
 
 	     while(rs.next())
         {
-	    	 System.out.println(rs.getInt(1)); 
+	    	 Winnerid=rs.getInt(1);
+	    	 System.out.println(Winnerid); 
         }
 	} 
    	catch (SQLException e) 
@@ -113,9 +114,10 @@ public class Dashboard {
 		
 	   	try 
 	   	{
-		   		System.out.println("ok1");
-		   	 insert = con1.prepareStatement("select Cname,StudentId from candidatetbl where ElectionName = ?");
-	         insert.setInt(1, Key);
+	   		
+		   		System.out.println("ok1" + Winnerid);
+		   	 insert = con1.prepareStatement("select Cname,StudentId from candidatetbl where Cld = ?");
+	         insert.setInt(1, Winnerid);
 	         ResultSet rs = insert.executeQuery();
 
 		     while(rs.next())

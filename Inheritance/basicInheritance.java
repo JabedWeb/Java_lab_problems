@@ -1,6 +1,10 @@
 package Inheritance;
 
 
+interface A{
+	public void display();
+}
+
  abstract class rectangle{
 	void display(){
 		System.out.println("oK");
@@ -8,9 +12,12 @@ package Inheritance;
    abstract void area();
 }
 
-class square extends rectangle {
+class square extends rectangle implements A {
 	void area(){
 		System.out.println("Out");
+	}
+	public void display(){
+		System.out.println("OK");
 	}
 }
 

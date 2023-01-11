@@ -6,6 +6,10 @@ class AgeOutOfRangeException extends Exception{
     AgeOutOfRangeException(int age){
         System.out.println("You are older than requested age (25 Years)"+"you are "+age);
     }
+    @Override
+    public String toString() {
+        return "AgeOutOfRangeException"; 
+    }
 }
 class LowGpaException extends Exception{
     LowGpaException(double gpa){

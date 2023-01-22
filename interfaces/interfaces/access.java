@@ -1,7 +1,7 @@
 package interfaces;
 
 interface A{
-  protected void methodA();
+  void methodA();
 }
 
 interface B {

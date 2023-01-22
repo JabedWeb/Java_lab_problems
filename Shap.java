@@ -1,30 +1,65 @@
 
 
-class Shape2D{
-    double dim1,dim2;
-    Shape2D(double dim1, double dim2){
-        this.dim1 = dim1;
-        this.dim2 =dim2;
+class negativeScrore extends Exception{
+
+    negativeScrore(){
+        System.out.println("Negative Score");
     }
-    double area(){
-        double areas = (double) 1/2*dim2 * dim1;
-        return areas;
-    }
-    boolean equal(Shape2D obj){
-        if(area()==obj.area()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
 }
 
+class JavaProgramming{
+
+    private double score;
+
+    JavaProgramming(double score){
+        this.score=score;
+    }
+
+    void SetScore(double score){
+        try{
+            if(score<0){
+                throw new negativeScrore();
+            }
+            else {
+                this.score=score;
+            }
+        }catch(negativeScrore e){
+            System.out.println(e);
+        }
+    }
+
+    public double getscore(){
+        return score;
+    }
+
+     public double getTotal(JavaProgramming ob[],int numberOfExams){
+        double total=0;
+        for(int i=0;i<numberOfExams;i++){
+            System.out.println(ob[i].getscore());
+            total+=ob[i].getscore();
+        }
+        return total;
+    }
+
+}
+
+
 public class Shap {
-    public static void main(String[] args) {
-Shape2D obj1 = new Shape2D(3, 4);
-Shape2D obj2 = new Shape2D(3, 4);
-boolean res = obj2.equal(obj1);
-        System.out.println(res);
+    public static void main(String[] args){
+        double quiz=10;
+        double mid=20;
+        double finalScore=30;
+        JavaProgramming ob[]=new JavaProgramming[3];
+        try {
+            ob[0]=new JavaProgramming(-10);
+            ob[1]=new JavaProgramming(20);
+            ob[2]=new JavaProgramming(30);
+            double total=ob[0].getTotal(ob,3);
+            System.out.println(total);
+        } catch (Exception e) {
+
+        
+        }
     }
 }

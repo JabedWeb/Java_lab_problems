@@ -1,3 +1,4 @@
+package Theory_Final;
 
 
 class negativeScrore extends Exception{
@@ -36,7 +37,6 @@ class JavaProgramming{
      public double getTotal(JavaProgramming ob[],int numberOfExams){
         double total=0;
         for(int i=0;i<numberOfExams;i++){
-            System.out.println(ob[i].getscore());
             total+=ob[i].getscore();
         }
         return total;
@@ -45,7 +45,7 @@ class JavaProgramming{
 }
 
 
-public class Shap {
+public class ExceptionProblem {
     public static void main(String[] args){
         double quiz=10;
         double mid=20;
